@@ -201,11 +201,31 @@
       }
     }
 
-    function updateCountdown() {
+   function updateCountdown() {
   const now = new Date();
 
-  // 20 March 2026 at the SAME current time
-  const next = new Date(2026, 2, 20, now.getHours(), now.getMinutes(), now.getSeconds());
+  let year = now.getFullYear();
+  let month = now.getMonth(); // 0-based
+  const day = 20;
+
+  // If today is the 20th or later, go to next month
+  if (now.getDate() >= 20) {
+    month += 1;
+    if (month > 11) {
+      month = 0;
+      year += 1;
+    }
+  }
+
+  // Target next 20th at the SAME current time
+  const next = new Date(
+    year,
+    month,
+    day,
+    now.getHours(),
+    now.getMinutes(),
+    now.getSeconds()
+  );
 
   const diff = next - now;
 
@@ -219,7 +239,6 @@
     el.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
   }
 }
-
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
