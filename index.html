@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Lamoorti 💗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #fff0f6);
+      color: #5a2a3a;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header { padding: 80px 20px 60px; }
+    h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .subtitle { font-size: 1.2em; opacity: 0.8; }
+
+    .card {
+      background: white;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .counter, .countdown {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    footer {
+      padding: 40px 20px 60px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-120vh); }
+    }
+
+    /* Pop-up note */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      margin: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .popup button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      background: #ff7eb3;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>For Lamoorti 💗</h1>
+  <p class="subtitle">From Ahmed — 8 months of us</p>
+</header>
+
+<div class="card">
+  <h2>Our Time Together ⏳</h2>
+  <div id="counter" class="counter"></div>
+  <p>Since 20 June 2025</p>
+</div>
+
+<div class="card">
+  <h2>Next Anniversary Countdown 🎉</h2>
+  <div id="countdown" class="countdown"></div>
+  <p>Until our next month together 💕</p>
+</div>
+
+<div class="card">
+  <h2>My Message to You 💌</h2>
+  <p>
+    From 20/6/2025 to 20/2/2026 — 8 months of us.<br><br>
+    I just want you to know how much I adore you and appreciate you.<br>
+    You make my days lighter, my smiles easier,<br>
+    and my world feel warmer just by being in it.<br><br>
+    This little page is just a small way to say<br>
+    that you mean more to me than I could ever fit into words.<br><br>
+    I’m grateful for you.<br>
+    Today, tomorrow, and every day after.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Our Photos 📸</h2>
+  <p>Add your photos by replacing the image files.</p>
+  <div class="gallery">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+  </div>
+</div>
+
+<div class="card">
+  <h2>Future Messages 📝</h2>
+  <p>
+    I will always love you.<br>
+    (I’ll keep adding more words here as my love grows.)
+  </p>
+</div>
+
+<audio src="your-song.mp3" autoplay loop></audio>
+
+<footer>
+  Made with love by Ahmed 💖
+</footer>
+
+<!-- Pop-up Love Note -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>For You, My Love 💗</h2>
+    <p>
+      You are my favorite part of every day.<br>
+      I love you more than yesterday<br>
+      and less than tomorrow.
+    </p>
+    <button onclick="closePopup()">Close 💕</button>
+  </div>
+</div>
+
+<script>
+  const startDate = new Date("2025-06-20T00:00:00");
+
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("counter").innerText =
+      `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    let next = new Date(now.getFullYear(), now.getMonth() + 1, 20);
+    if (now.getDate() >= 20) {
+      next = new Date(now.getFullYear(), now.getMonth() + 2, 20);
+    }
+
+    const diff = next - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+    document.getElementById("countdown").innerText =
+      `${days} days, ${hours} hours, ${minutes} minutes`;
+  }
+
+  setInterval(updateCounter, 1000);
+  setInterval(updateCountdown, 1000);
+  updateCounter();
+  updateCountdown();
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+  setInterval(createHeart, 700);
+
+  // Show popup once when page loads
+  setTimeout(() => {
+    document.getElementById("popup").style.display = "flex";
+  }, 1500);
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
