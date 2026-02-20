@@ -184,13 +184,21 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
 
-    // Lock dates in UTC but representing Israel midnight
-    const startDateUTC = Date.UTC(2025, 5, 19, 21, 0, 0);      // 20 June 2025 00:00 Israel
-    const anniversaryUTC = Date.UTC(2026, 5, 19, 21, 0, 0);  // 20 June 2026 00:00 Israel
+    function getIsraelNow() {
+      const israelNow = new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Jerusalem" })
+      );
+      return israelNow;
+    }
+
+    const startDate = new Date("2025-06-20T00:00:00+03:00");
+    const anniversaryDate = new Date("2026-06-20T00:00:00+03:00");
 
     function updateCounter() {
-      const nowUTC = Date.now();
-      const diff = nowUTC - startDateUTC;
+      const now = getIsraelNow();
+      now.setHours(now.getHours() - 1); // ⏪ go back 1 hour
+
+      const diff = now - startDate;
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -202,8 +210,10 @@
     }
 
     function updateCountdown() {
-      const nowUTC = Date.now();
-      const diff = anniversaryUTC - nowUTC;
+      const now = getIsraelNow();
+      now.setHours(now.getHours() + 1); // ⏩ go ahead 1 hour
+
+      const diff = anniversaryDate - now;
 
       const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
       const hours = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
@@ -258,7 +268,6 @@
         btn.innerText = "▶️ Play Music";
       }
     });
-
   });
 </script>
   
