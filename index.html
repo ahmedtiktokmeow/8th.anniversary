@@ -185,19 +185,17 @@
   document.addEventListener("DOMContentLoaded", function () {
 
     function getIsraelNow() {
-      const israelNow = new Date(
+      return new Date(
         new Date().toLocaleString("en-US", { timeZone: "Asia/Jerusalem" })
       );
-      return israelNow;
     }
 
-    const startDate = new Date("2025-06-20T00:00:00+03:00");
-    const anniversaryDate = new Date("2026-06-20T00:00:00+03:00");
+    // Dates in Israel local time (no hardcoded UTC offset)
+    const startDate = new Date("2025-06-20T00:00:00");
+    const anniversaryDate = new Date("2026-06-20T00:00:00");
 
     function updateCounter() {
       const now = getIsraelNow();
-      now.setHours(now.getHours() - 1); // ⏪ go back 1 hour
-
       const diff = now - startDate;
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -211,8 +209,6 @@
 
     function updateCountdown() {
       const now = getIsraelNow();
-      now.setHours(now.getHours() + 1); // ⏩ go ahead 1 hour
-
       const diff = anniversaryDate - now;
 
       const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
@@ -270,6 +266,6 @@
     });
   });
 </script>
-
+  
 </body>
 </html>
