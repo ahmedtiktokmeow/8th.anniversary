@@ -111,7 +111,7 @@
 </div>
 
 <div class="card">
-  <h2>First Anniversary Countdown 🎉</h2>
+  <h2>First Year Anniversary Countdown 🎉</h2>
   <div id="countdown" class="countdown"></div>
   <p>Until our 1 year together 💕</p>
 </div>
@@ -180,12 +180,20 @@
   </div>
 </div>
 
-<script> 
+<script>
   document.addEventListener("DOMContentLoaded", function () {
-    const startDate = new Date(2025, 5, 20, 0, 0, 0);
+
+    function getIsraelNow() {
+      return new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Jerusalem" })
+      );
+    }
+
+    const startDate = new Date("2025-06-20T00:00:00+03:00");
+    const anniversaryDate = new Date("2026-06-20T00:00:00+03:00");
 
     function updateCounter() {
-      const now = new Date();
+      const now = getIsraelNow();
       const diff = now - startDate;
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -193,30 +201,25 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      const el = document.getElementById("counter");
-      if (el) {
-        el.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-      }
+      document.getElementById("counter").innerText =
+        `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
     }
 
     function updateCountdown() {
-      const now = new Date();
-      const next = new Date(2026, 5, 20, 0, 0, 0);
-
-      const diff = next - now;
+      const now = getIsraelNow();
+      const diff = anniversaryDate - now;
 
       const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
       const hours = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
       const minutes = Math.max(0, Math.floor((diff / (1000 * 60)) % 60));
       const seconds = Math.max(0, Math.floor((diff / 1000) % 60));
 
-      const el = document.getElementById("countdown");
-      if (el) {
-        if (diff <= 0) {
-          el.innerText = "🎉 Happy 1 Year Anniversary, my love 💗";
-        } else {
-          el.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-        }
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText =
+          "🎉 Happy 1 Year Anniversary, my love 💗";
+      } else {
+        document.getElementById("countdown").innerText =
+          `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
       }
     }
 
